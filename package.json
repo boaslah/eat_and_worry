@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "postcss ./src/public/css/tailwind.css -o ./src/public/css/build/tailwind.css && nodemon server.js",
-    "build": "postcss ./public/css/tailwind.css -o ./public/css/build/tailwind.css && node app.js"
+    "build": "postcss ./src/public/css/tailwind.css -o ./src/public/css/build/tailwind.css && nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
+    "http": "^0.0.1-security",
     "jsonwebtoken": "^9.0.1",
     "nodemon": "^2.0.20",
     "showdown": "^2.1.0"
