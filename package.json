@@ -1,7 +1,7 @@
 {
-  "name": "WASSCE Tutor",
+  "name": "Eat and worry",
   "version": "1.0.0",
-  "description": "Helping students answer WASSCE questions",
+  "description": "",
   "main": "server.js",
   "type": "module",
   "scripts": {
@@ -13,15 +13,14 @@
     "type": "git",
     "url": "git+https://github.com/Kwagei/eat_and_worry-api.git"
   },
-  "author": "Kwagei",
+  "author": "me",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Kwagei/eat_and_worry-api/issues"
+    "url": "https://github.com/boaslah/eat_and_worry-api/issues"
   },
-  "homepage": "https://github.com/Kwagei/eat_and_worry-api#readme",
+  "homepage": "https://github.com/boaslah/eat_and_worry-api#readme",
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
-    "axios": "^1.4.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.9",
