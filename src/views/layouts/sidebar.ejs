@@ -1,0 +1,293 @@
+<div id="sidebar" class="hidden sm:block relative overflow-y-auto">
+    
+  <template>
+    <div class="h-full w-full  sm:w-[250px]  px-5 flex grow flex-col bg-color1 overflow-y-auto">
+      <div class="flex sm:-mx-2 -mx-5">
+        <div class="flex grow sm:mr-0 w-full items-left pt-3 sm:pt-8">
+          <a class="sm:w-full ml-4 sm:ml-0" href="/"><img src="/images/logo.png"  alt="Your Company" /></a>
+          <svg @click="closeSidebar()" class="sm:hidden  mt-4 ml-20 w-full h-10 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+          </svg>
+        </div>
+      </div>
+      
+      <nav class="flex flex-1 sm:mt-7 mt-4  flex-col">
+        <ul role="list" class="flex flex-1 flex-col gap-y-7">
+          <li>
+            <div class="text-base  font-semibold leading-6 text-white">Main</div>
+
+            <ul role="list" class="-mx-2 mt-2 space-y-1">
+              <li v-if="role != 'student'">
+                <!-- Current: "bg-gray-800 text-white", Default: "text-gray-400 hover:text-white hover:bg-gray-800" -->
+                <a href="/web/dashboard" :class="[ dashboard ? 'bg-color2': '', 'text-white group flex gap-x-3 hover:bg-color2 rounded-md p-2 text-base leading-6 font-semibold']">
+                  <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                  </svg>
+                  Dashboard
+                  <!-- <span class="ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-gray-900 px-2.5 py-0.5 text-center text-xs font-medium leading-5 text-white ring-1 ring-inset ring-gray-700" aria-hidden="true">5</span> -->
+                </a>
+              </li>
+              <li v-if="role === 'student'">
+                <a href="/web/practice" :class="[practice ? 'bg-color2': '','text-white hover:text-white hover:bg-color2 group flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold']">
+                  <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023"/>
+                  </svg>                  
+                  Practice
+                </a>
+              </li>
+              <li v-if="role === 'student'">
+                <a href="/web/self-quiz" :class="[quiz ? 'bg-color2': '', 'text-white hover:text-white hover:bg-color2 group flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold']">
+                  <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v13H7a2 2 0 0 0-2 2Zm0 0a2 2 0 0 0 2 2h12M9 3v14m7 0v4"/>
+                  </svg>                  
+                  Self Quiz
+                  <!-- <span class="ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-gray-900 px-2.5 py-0.5 text-center text-base font-medium leading-5 text-white ring-1 ring-inset ring-gray-700" aria-hidden="true">12</span> -->
+                </a>
+              </li>
+              <li v-if="role === 'student'">
+                <!-- Current: "bg-gray-800 text-white", Default: "text-gray-400 hover:text-white hover:bg-gray-800" -->
+                <a href="/web/profile" :class="[ profile ? 'bg-color2': '', 'text-white group flex gap-x-3 hover:bg-color2 rounded-md p-2 text-base leading-6 font-semibold']">
+                  <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 13 16h-2a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 12 21Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                  </svg>                                    
+                  Profile
+                  <!-- <span class="ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-gray-900 px-2.5 py-0.5 text-center text-xs font-medium leading-5 text-white ring-1 ring-inset ring-gray-700" aria-hidden="true">5</span> -->
+                </a>
+              </li>
+              <li v-if="role === 'student'">
+                <!-- Current: "bg-gray-800 text-white", Default: "text-gray-400 hover:text-white hover:bg-gray-800" -->
+                <a href="#" :class="[ dashboard ? 'bg-color2': '', 'text-white group flex gap-x-3 hover:bg-color2 rounded-md p-2 text-base leading-6 font-semibold']">
+                  <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 4h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3m0 3h6m-5-4v4h4V3h-4Z"/>
+                  </svg>                  
+                  Leader Board
+                  <!-- <span class="ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-gray-900 px-2.5 py-0.5 text-center text-xs font-medium leading-5 text-white ring-1 ring-inset ring-gray-700" aria-hidden="true">5</span> -->
+                </a>
+              </li>
+              <li v-if="role === 'super-admin'">
+                <a href="/portal/questions" :class="[questions ? 'bg-color2': '', 'text-white hover:text-white hover:bg-color2 group flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold']">
+                  <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 6c0 1.657-3.134 3-7 3S5 7.657 5 6m14 0c0-1.657-3.134-3-7-3S5 4.343 5 6m14 0v6M5 6v6m0 0c0 1.657 3.134 3 7 3s7-1.343 7-3M5 12v6c0 1.657 3.134 3 7 3s7-1.343 7-3v-6"/>
+                  </svg>                  
+                  Questions
+                  <!-- <span class="ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-gray-900 px-2.5 py-0.5 text-center text-base font-medium leading-5 text-white ring-1 ring-inset ring-gray-700" aria-hidden="true">12</span> -->
+                </a>
+              </li>
+              <li v-if="role === 'super-admin'">
+                <a href="/portal/topics" :class="[topics ? 'bg-color2': '', 'text-white hover:text-white hover:bg-color2 group flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold']">
+                  <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 6c0 1.657-3.134 3-7 3S5 7.657 5 6m14 0c0-1.657-3.134-3-7-3S5 4.343 5 6m14 0v6M5 6v6m0 0c0 1.657 3.134 3 7 3s7-1.343 7-3M5 12v6c0 1.657 3.134 3 7 3s7-1.343 7-3v-6"/>
+                  </svg>                  
+                  Topics
+                  <!-- <span class="ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-gray-900 px-2.5 py-0.5 text-center text-base font-medium leading-5 text-white ring-1 ring-inset ring-gray-700" aria-hidden="true">12</span> -->
+                </a>
+              </li>
+              <li v-if="role === 'super-admin'">
+                <a href="/portal/subtopics" :class="[subtopics ? 'bg-color2': '', 'text-white hover:text-white hover:bg-color2 group flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold']">
+                  <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 6c0 1.657-3.134 3-7 3S5 7.657 5 6m14 0c0-1.657-3.134-3-7-3S5 4.343 5 6m14 0v6M5 6v6m0 0c0 1.657 3.134 3 7 3s7-1.343 7-3M5 12v6c0 1.657 3.134 3 7 3s7-1.343 7-3v-6"/>
+                  </svg>                  
+                  Subtopics
+                  <!-- <span class="ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-gray-900 px-2.5 py-0.5 text-center text-base font-medium leading-5 text-white ring-1 ring-inset ring-gray-700" aria-hidden="true">12</span> -->
+                </a>
+              </li>
+              <li v-if="role === 'super-admin'">
+                <a href="/portal/mappings" :class="[mappings ? 'bg-color2': '', 'text-white hover:text-white hover:bg-color2 group flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold']">
+                  <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 6c0 1.657-3.134 3-7 3S5 7.657 5 6m14 0c0-1.657-3.134-3-7-3S5 4.343 5 6m14 0v6M5 6v6m0 0c0 1.657 3.134 3 7 3s7-1.343 7-3M5 12v6c0 1.657 3.134 3 7 3s7-1.343 7-3v-6"/>
+                  </svg>                  
+                  Mappings
+                  <!-- <span class="ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-gray-900 px-2.5 py-0.5 text-center text-base font-medium leading-5 text-white ring-1 ring-inset ring-gray-700" aria-hidden="true">12</span> -->
+                </a>
+              </li>
+              <li v-if="role === 'super-admin'">
+                <a href="/portal/schools" :class="[schools ? 'bg-color2': '', 'text-white hover:text-white hover:bg-color2 group flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold']">
+                  <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 4h12M6 4v16M6 4H5m13 0v16m0-16h1m-1 16H6m12 0h1M6 20H5M9 7h1v1H9V7Zm5 0h1v1h-1V7Zm-5 4h1v1H9v-1Zm5 0h1v1h-1v-1Zm-3 4h2a1 1 0 0 1 1 1v4h-4v-4a1 1 0 0 1 1-1Z"/>
+                  </svg>                  
+                  Schools
+                  <!-- <span class="ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-gray-900 px-2.5 py-0.5 text-center text-base font-medium leading-5 text-white ring-1 ring-inset ring-gray-700" aria-hidden="true">12</span> -->
+                </a>
+              </li>
+              <li v-if="role === 'super-admin'">
+                <a href="/portal/feedback" :class="[feedback ? 'bg-color2': '', 'text-white hover:text-white hover:bg-color2 group flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold']">
+                  <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5h9M5 9h5m8-8H2a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h4l3.5 4 3.5-4h5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
+                  </svg>                 
+                  Feedback
+                  <!-- <span class="ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-gray-900 px-2.5 py-0.5 text-center text-base font-medium leading-5 text-white ring-1 ring-inset ring-gray-700" aria-hidden="true">12</span> -->
+                </a>
+              </li>
+              <li v-if="role === 'super-admin'">
+                <a href="/portal/users" :class="[users ? 'bg-color2': '', 'text-white hover:text-white hover:bg-color2 group flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold']">
+                  <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M4.5 17H4a1 1 0 0 1-1-1 3 3 0 0 1 3-3h1m0-3.05A2.5 2.5 0 1 1 9 5.5M19.5 17h.5a1 1 0 0 0 1-1 3 3 0 0 0-3-3h-1m0-3.05a2.5 2.5 0 1 0-2-4.45m.5 13.5h-7a1 1 0 0 1-1-1 3 3 0 0 1 3-3h3a3 3 0 0 1 3 3 1 1 0 0 1-1 1Zm-1-9.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z"/>
+                  </svg>                  
+                  Users
+                  <!-- <span class="ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-gray-900 px-2.5 py-0.5 text-center text-base font-medium leading-5 text-white ring-1 ring-inset ring-gray-700" aria-hidden="true">12</span> -->
+                </a>
+              </li>
+              <li v-if="role === 'admin' || role === 'teacher'">
+                <a href="/web/assessment" :class="[assessment ? 'bg-color2': '', 'text-white hover:text-white hover:bg-color2 group flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold']">
+                  <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v13H7a2 2 0 0 0-2 2Zm0 0a2 2 0 0 0 2 2h12M9 3v14m7 0v4"/>
+                  </svg>                  
+                  Generate Assessment
+                  <!-- <span class="ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-gray-900 px-2.5 py-0.5 text-center text-base font-medium leading-5 text-white ring-1 ring-inset ring-gray-700" aria-hidden="true">20+</span> -->
+                </a>
+              </li>
+              <li v-if="role === 'admin'">
+                <a href="/web/students" :class="[students ? 'bg-color2': '','text-white hover:text-white hover:bg-color2 group flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold']">
+                  <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M4.5 17H4a1 1 0 0 1-1-1 3 3 0 0 1 3-3h1m0-3.05A2.5 2.5 0 1 1 9 5.5M19.5 17h.5a1 1 0 0 0 1-1 3 3 0 0 0-3-3h-1m0-3.05a2.5 2.5 0 1 0-2-4.45m.5 13.5h-7a1 1 0 0 1-1-1 3 3 0 0 1 3-3h3a3 3 0 0 1 3 3 1 1 0 0 1-1 1Zm-1-9.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z"/>
+                  </svg>                  
+                  Students
+                </a>
+              </li>
+              <li v-if="role === 'admin' ">
+                <a href="/web/teachers" :class="[teachers ? 'bg-color2': '', 'text-white hover:text-white hover:bg-color2 group flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold']">
+                  <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                  </svg>
+                  Teachers
+                  <!-- <span class="ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-gray-900 px-2.5 py-0.5 text-center text-base font-medium leading-5 text-white ring-1 ring-inset ring-gray-700" aria-hidden="true">20+</span> -->
+                </a>
+              </li>
+              <li v-if="role === 'admin' ">
+                <a href="/web/admins" :class="[admins ? 'bg-color2': '', 'text-white hover:text-white hover:bg-color2 group flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold']">
+                  <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                  </svg>
+                  Admins
+                  <!-- <span class="ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-gray-900 px-2.5 py-0.5 text-center text-base font-medium leading-5 text-white ring-1 ring-inset ring-gray-700" aria-hidden="true">20+</span> -->
+                </a>
+              </li>
+              <li v-if="role === 'admin' ">
+                <a href="/web/activity" :class="[activity ? 'bg-color2': '', 'text-white hover:text-white hover:bg-color2 group flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold']">
+                  <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.348 14.651a3.75 3.75 0 010-5.303m5.304 0a3.75 3.75 0 010 5.303m-7.425 2.122a6.75 6.75 0 010-9.546m9.546 0a6.75 6.75 0 010 9.546M5.106 18.894c-3.808-3.808-3.808-9.98 0-13.789m13.788 0c3.808 3.808 3.808 9.981 0 13.79M12 12h.008v.007H12V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                  </svg>
+                  Activity
+                  <!-- <span class="ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-gray-900 px-2.5 py-0.5 text-center text-base font-medium leading-5 text-white ring-1 ring-inset ring-gray-700" aria-hidden="true">20+</span> -->
+                </a>
+              </li>
+              <li v-if="role != 'super-admin' ">
+                <a href="/web/wassceTips" class="text-white hover:text-white hover:bg-color2 group flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold">
+                  <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" />
+                  </svg>
+                  WASSCE Tips
+                </a>
+              </li>
+              <!-- <li>
+                <a href="#" class="text-white hover:text-white hover:bg-color2 group flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold">
+                  <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" />
+                  </svg>
+                  My Account
+                </a>
+              </li> -->
+            </ul>
+          </li>
+          <li>
+            <div  class="text-base font-semibold leading-6 text-white">Help</div>
+            <ul role="list" class="-mx-2 mt-2 space-y-1">
+              <li>
+                <!-- Current: "bg-gray-800 text-white", Default: "text-gray-400 hover:text-white hover:bg-gray-800" -->
+                <a href="#" class="text-white hover:text-white hover:bg-color2 group flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold">
+                  <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-white bg-color2 text-[0.625rem] font-medium text-white group-hover:text-white">S</span>
+                  <span class="truncate">Support</span>
+                </a>
+              </li>
+              <li v-if="role != 'super-admin' ">
+                <a href="/web/feedback" :class="[feedback ? 'bg-color2': '', 'text-white hover:text-white hover:bg-color2 group flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold']">
+                  <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-white bg-color2 text-[0.625rem] font-medium text-white group-hover:text-white">F</span>
+                  <span class="truncate">Feedback</span>
+                </a>
+              </li>
+              <li v-if="role != 'super-admin' ">
+                <a href="#" class="text-white hover:text-white hover:bg-color2 group flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold">
+                  <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-white bg-color2 text-[0.625rem] font-medium text-white group-hover:text-white">S</span>
+                  <span class="truncate">Settings</span>
+                </a>
+              </li>
+              <li v-if="role != 'super-admin' ">
+                <a href="#" class="text-white hover:text-white hover:bg-color2 group flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold">
+                  <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-white bg-color2 text-[0.625rem] font-medium text-white group-hover:text-white">F</span>
+                  <span class="truncate">FAQ</span>
+                </a>
+              </li>
+              <li class="sm:hidden">
+                <a href="/logout" class="text-white hover:text-white hover:bg-color2 group flex gap-x-3 rounded-md p-2 text-base leading-6 font-semibold">
+                  <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-white bg-color2 text-[0.625rem] font-medium text-white group-hover:text-white">L</span>
+                  <span class="truncate">Logout</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <div class="sm:hidden flex -mx-2 flex-shrink-0 border-t mt-3 border-gray-200 p-4">
+        <a href="#" class="group block w-full flex-shrink-0">
+          <div class="flex items-center">
+            <div>
+              <img class="inline-block h-9 w-9 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+            </div>
+            <div class="">
+              <span class="flex pb-4 items-center">
+                <span class="ml-4 text-sm font-semibold leading-6 text-white"  aria-hidden="true"><%= name %></span>
+                <p class="absolute text-sm mt-10 pl-4 text-white"><%= role[0].toUpperCase() + role.substr(1, role.length) %></p>
+                </span>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </template>    
+
+</div>
+<!-- <script src='https://cdn.jsdelivr.net/npm/heroicons@2.0.18/20/solid/'></script> -->
+<!-- <script src="https://unpkg.com/browse/@heroicons/vue@2.0.18/24/outline/esm/"></script> -->
+
+<script>
+    const currentPage =  "<%- current %>";
+    const role = "<%- role %>";
+    const user = "<%- user %>";
+    
+    const app = new Vue({
+        el: "#sidebar",
+        data: {
+          practice: currentPage === "Practice",
+          dashboard: currentPage === "Dashboard",
+          quiz: currentPage === "Quiz",
+          assessment: currentPage === "Generate Assessment",
+          teachers: currentPage === "Teachers",
+          students: currentPage === "Students",
+          admins: currentPage === "Admins",
+          questions: currentPage === "Questions",
+          topics: currentPage === "Topics",
+          subtopics: currentPage === "Subtopics",
+          mappings: currentPage === "Mappings",
+          schools: currentPage === "Schools",
+          users: currentPage === "Users",
+          activity: currentPage === "Activity",
+          feedback: currentPage === "Feedback",
+          profile: currentPage === "Profile",
+          fedback: currentPage === "Feedback",
+          role: role,
+          open_drop_down: false
+        },
+        methods:{
+          toggleDropdown(){
+            this.open_drop_down === true ? this.open_drop_down = false : this.open_drop_down = true;
+          },
+          closeSidebar(){
+              document.getElementById("sidebar").style.display = "none";
+
+          }
+        }
+    })
+</script>
+  

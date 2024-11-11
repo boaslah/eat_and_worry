@@ -1,0 +1,83 @@
+<%- include('../layouts/header'); -%>
+<body>
+    <div class="h-screen flex overflow-hidden">
+            <%- include('../layouts/sidebar', {current: page, user: user_name, name: user, role: role}); -%>
+
+        <div id="main" class="flex flex-col w-0 flex-1 overflow-hidden">
+            <div id="heading">
+                <div class="grid grid-cols-2 block border-gray-200 shadow border-2 bg-white px-5 py-2 sm:px-20 sm:py-5 sm:px-6">
+
+                    <div class="">
+                        <h1 class="hidden sm:flex text-xl sm:text-2xl font-semibold leading-6 text-gray-900"><%= school %></h1>
+                        <a class="sm:hidden w-full ml-0 mb-5" href="/"><img src="/images/logo2.png"  alt="Your Company" /></a>
+
+                    </div>
+                    
+
+                    <div class="flex items-center justify-end space-x-4 sm:ml-6 sm:space-x-6">
+                        <button type="button" class="sm:invisible" @click="openSidebar()">
+                            <svg class="w-8 h-6 text-color1 dark:text-color1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+                            </svg>
+                              
+                        </button>    
+                        <button type="button" class="hidden sm:flex -m-1.5 flex items-center p-1.5" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                      
+                            <span class="sr-only">Open user menu</span>
+                            <img class="h-10 w-10 rounded-full bg-gray-50" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                            <span class="hidden lg:flex pb-4 lg:items-center">
+                                <span class="ml-4 text-sm font-semibold leading-6 text-gray-900" aria-hidden="true"><%= user %></span>
+                                <p class="absolute text-sm mt-10 pl-4 text-gray-500"><%= role[0].toUpperCase() + role.substr(1, role.length) %></p>
+
+                                <span @click="toggleDropdown()">
+
+                                    <svg class="ml-2 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                                    </svg>
+                                </span>
+                            </span>
+
+                        </button>
+                        <div  v-if="open_drop_down" @click="toggleDropdown()" class="absolute z-10 mt-10 flex ml-16 pt-[120px]">
+                            <div class="flex-auto rounded-lg bg-white p-2 text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
+                              <div class="relative rounded-lg p-2 hover:bg-gray-50">
+                                <a :href="[role === 'student' ? '/web/profile': '#']" class="font-semibold text-gray-900">
+                                  View Profile
+                                  <span class="absolute inset-0"></span>
+                                </a>
+                              </div>
+                              <div class="relative rounded-lg p-2 hover:bg-gray-50">
+                                <a href="/logout" class="font-semibold text-gray-900">
+                                  Log Out
+                                  <span class="absolute inset-0"></span>
+                                </a>
+                              </div>
+                            </div>
+                        </div>
+                    </div>             
+
+                </div>
+            </div>
+
+
+<script type="module">
+    const app = new Vue({
+    el: "#heading",
+    data: {
+        open_drop_down: false,
+
+    },
+    methods:{
+        toggleDropdown(){
+            this.open_drop_down === true ? this.open_drop_down = false : this.open_drop_down = true;
+        },
+        openSidebar(){
+            document.getElementById("sidebar").style.display = "block";
+
+        }
+    }
+})
+        
+</script>
+            
+            

@@ -1,0 +1,41 @@
+{
+  "name": "WASSCE Tutor",
+  "version": "1.0.0",
+  "description": "Helping students answer WASSCE questions",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "postcss ./src/public/css/tailwind.css -o ./src/public/css/build/tailwind.css && nodemon server.js",
+    "build": "postcss ./public/css/tailwind.css -o ./public/css/build/tailwind.css && node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kwagei/eat_and_worry-api.git"
+  },
+  "author": "Kwagei",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kwagei/eat_and_worry-api/issues"
+  },
+  "homepage": "https://github.com/Kwagei/eat_and_worry-api#readme",
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "axios": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "jsonwebtoken": "^9.0.1",
+    "nodemon": "^2.0.20",
+    "showdown": "^2.1.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.2.1",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.27",
+    "postcss-cli": "^8.3.1",
+    "tailwindcss": "^3.3.3"
+  }
+}
